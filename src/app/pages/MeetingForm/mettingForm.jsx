@@ -1,27 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { useSelector, useDispatch } from "react-redux";
 import * as meetingDetailsAction from '../../store/actions/meetingActions'
 import {v4 as generateUUID} from 'uuid';
+import {IoMdCreate} from 'react-icons/io'
+import DtPicker, {convertToFa} from 'react-calendar-datetime-picker'
+import 'react-calendar-datetime-picker/dist/index.css'
+import DateTimePicker from 'react-datetime-picker';
 
 const MeetingForm = (props) => {
-  const {
-    createMeetingDetails
-  } = useSelector((store) => store.meetingDetail);
+
+  const [meetingStartTime, setMeetingStartTime] = useState(null)
+  const [meetingEndTime, setMeetingEndTime] = useState(null)
+
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
     const createMeetingDetailsPayload = {
       meetingId: values.meetingID,
       hostId: values.hostID,
+      hostCode: values.hostCode,
       hostName: values.hostName,
       guestID: values.guestID,
+      guestCode: values.guestCode,
       guestName: values.guestName,
-      meetingStartTime: "2022-07-01T11:46:33.630Z",
-      meetingEndTime: "2022-07-01T12:46:33.630Z",
-      createdOn: new Date(), 
+      meetingStartTime: meetingStartTime.toISOString(),
+      meetingEndTime: meetingEndTime.toISOString(),
+      metadata: {
+        studyID: values.studyID,
+        tenantID: values.tenantID,
+        subject: values.subject,
+      },
       createdBy: values.hostID
     }
+    console.log("values:", createMeetingDetailsPayload)
     dispatch(meetingDetailsAction.createMeetingDetails(createMeetingDetailsPayload));
   }
   return (
@@ -51,8 +63,12 @@ const MeetingForm = (props) => {
                           className="form-control form-control-sg"
                           component="input"
                         />
-                        <button className="btn btn-block btn-sm btn-danger text-body" type="button" onClick={() => form.change("meetingID", generateUUID())}>
-                          GEN
+                        <button 
+                          className="btn btn-block btn-sm btn-secondary text-body mx-1" 
+                          type="button" 
+                          onClick={() => form.change("meetingID", generateUUID())}
+                        >
+                          <IoMdCreate size={20} />
                         </button>
                       </div>
                       <div className="d-flex form-outline mb-4">
@@ -68,12 +84,15 @@ const MeetingForm = (props) => {
                           className="form-control form-control-sg"
                           component="input"
                         />
-                        <button className="btn btn-block btn-sm btn-danger text-body" type="button" onClick={() => {
-                          const someValue = generateUUID();
-                          form.change("hostID", someValue)
-                          form.change("createdBy", someValue)
+                        <button 
+                          className="btn btn-block btn-sm btn-secondary text-body mx-1" 
+                          type="button" 
+                          onClick={() => {
+                            const someValue = generateUUID();
+                            form.change("hostID", someValue)
+                            form.change("createdBy", someValue)
                         }}>
-                          GEN
+                          <IoMdCreate size={20} />
                         </button>
                       </div>
                       <div className="d-flex form-outline mb-4">
@@ -95,6 +114,20 @@ const MeetingForm = (props) => {
                           className="form-label mt-1"
                           style={{ width: "6rem" }}
                         >
+                          Host Code
+                        </label>
+                        <Field
+                          name="hostCode"
+                          style={{ width: "20rem", marginLeft: "10px" }}
+                          className="form-control form-control-sg"
+                          component="input"
+                        />
+                      </div>
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
                           Guest ID
                         </label>
                         <Field
@@ -103,8 +136,12 @@ const MeetingForm = (props) => {
                           className="form-control form-control-sg"
                           component="input"
                         />
-                        <button className="btn btn-block btn-sm btn-danger text-body" type="button" onClick={() => form.change("guestID", generateUUID())}>
-                          GEN
+                        <button 
+                          className="btn btn-block btn-sm btn-secondary text-body mx-1" 
+                          type="button" 
+                          onClick={() => form.change("guestID", generateUUID())}
+                        >
+                          <IoMdCreate size={20} />
                         </button>
                       </div>
                       <div className="d-flex form-outline mb-4">
@@ -121,7 +158,106 @@ const MeetingForm = (props) => {
                           component="input"
                         />
                       </div>
-                      {console.log(createMeetingDetails, 'createMeetingDetails')}
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
+                          Guest Code
+                        </label>
+                        <Field
+                          name="guestCode"
+                          style={{ width: "20rem", marginLeft: "10px" }}
+                          className="form-control form-control-sg"
+                          component="input"
+                        />
+                      </div>
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
+                          Study ID
+                        </label>
+                        <Field
+                          name="studyID"
+                          style={{ width: "20rem", marginLeft: "10px" }}
+                          className="form-control form-control-sg"
+                          component="input"
+                        />
+                        <button 
+                          className="btn btn-block btn-sm btn-secondary text-body mx-1" 
+                          type="button" 
+                          onClick={() => form.change("studyID", generateUUID())}
+                        >
+                          <IoMdCreate size={20} />
+                        </button>
+                      </div>
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
+                          Tenant ID
+                        </label>
+                        <Field
+                          name="tenantID"
+                          style={{ width: "20rem", marginLeft: "10px" }}
+                          className="form-control form-control-sg"
+                          component="input"
+                        />
+                        <button 
+                          className="btn btn-block btn-sm btn-secondary text-body mx-1" 
+                          type="button" 
+                          onClick={() => form.change("tenantID", generateUUID())}
+                        >
+                          <IoMdCreate size={20} />
+                        </button>
+                      </div>
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
+                          Subject
+                        </label>
+                        <Field
+                          name="subject"
+                          style={{ width: "20rem", marginLeft: "10px" }}
+                          className="form-control form-control-sg"
+                          component="input"
+                        />
+                      </div>
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
+                          Meeting Start Time
+                        </label>
+                        
+                        <DateTimePicker
+                          onChange={setMeetingStartTime}
+                          value={meetingStartTime}
+                          className="datetime-picker"
+                          disableClock
+                        />
+                      </div>
+                      <div className="d-flex form-outline mb-4">
+                        <label
+                          className="form-label mt-1"
+                          style={{ width: "6rem" }}
+                        >
+                          Meeting End Time
+                        </label>
+                        
+                        <DateTimePicker
+                          onChange={setMeetingEndTime}
+                          value={meetingEndTime}
+                          className="datetime-picker"
+                          disableClock
+                        />
+                      </div>
                       <div className="d-flex form-outline mb-4">
                         <label
                           className="form-label mt-1"
@@ -139,7 +275,7 @@ const MeetingForm = (props) => {
                       <div className="d-flex justify-content-center">
                         <button
                           type="submit"
-                          className="btn btn-block btn-lg btn-primary text-body"
+                          className="btn btn-block btn-lg btn-primary text-body text-white"
                         >
                           Submit
                         </button>

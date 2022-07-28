@@ -4,7 +4,10 @@ export class MeetingDetailsService {
     static createMeetingDetails = (data) => {
        return (async () => {
         try {
-          const result = await axios.post('https://azurevideomeetapi.azurewebsites.net/api/v1/meetingstore', data.payload)
+          console.log("SagaPayload:", data)
+          const result = await axios.post('https://viedocqavideoconnectapi.azurewebsites.net/api/v1/meeting', 
+          data
+          );
           return result
         } catch(e) {}
       })()
@@ -13,7 +16,7 @@ export class MeetingDetailsService {
     static getMeetingDetails = () => {
       return (async () => {
        try {
-         const result = await axios.get('https://azurevideomeetapi.azurewebsites.net/api/v1/meetingstore')
+         const result = await axios.get('https://viedocqavideoconnectapi.azurewebsites.net/api/v1/meeting')
          return result
        } catch(e) {}
      })()

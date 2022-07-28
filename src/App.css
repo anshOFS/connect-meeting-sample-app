@@ -49,3 +49,9 @@
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 }
+
+.datetime-picker {
+  /* background-color: #f1f1f1; */
+  padding: 10px;
+  border-radius: 5px;
+}

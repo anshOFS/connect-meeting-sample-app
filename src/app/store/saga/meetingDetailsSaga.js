@@ -3,9 +3,11 @@ import * as actionTypes from "../actions/actionTypes";
 import * as meetingActions from "../actions/meetingActions";
 import { MeetingDetailsService } from "../../service/meetingDetailService";
 
-export function* createMeetingDetailsSaga(payload) {
+export function* createMeetingDetailsSaga(action) {
     try {
-        const response = yield MeetingDetailsService.createMeetingDetails(payload);
+        console.log("Payload:", action.payload)
+        const response = yield MeetingDetailsService.createMeetingDetails(action.payload);
+        console.log("Response:", response)
         const {isError, result} = response.data; 
         if(!isError) {
             yield put(meetingActions.createMeetingDetailsSuccess(result));

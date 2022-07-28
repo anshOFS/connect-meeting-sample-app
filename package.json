@@ -12,8 +12,10 @@
     "final-form": "^4.20.7",
     "react": "^18.2.0",
     "react-calendar-datetime-picker": "^1.6.3",
+    "react-datetime-picker": "^3.5.0",
     "react-dom": "^18.2.0",
     "react-final-form": "^6.5.9",
+    "react-icons": "^4.4.0",
     "react-loading": "^2.0.3",
     "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-datetime-picker": "^3.4.1"
   }
 }

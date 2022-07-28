@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as meetingDetailsAction from "../../store/actions/meetingActions";
 import { useTable, useSortBy, usePagination } from "react-table";
+import {FiRefreshCcw} from 'react-icons/fi'
 
 const MeetingDetails = (props) => {
   const { meetingDetailsList } = useSelector((store) => store.meetingDetail);
@@ -19,19 +20,20 @@ const MeetingDetails = (props) => {
       accessor: "guestname",
     },
     {
-      Header: "Create By",
-      Footer: "Create By",
-      accessor: "createdby",
+      Header: "Meeting URL",
+      Footer: "Meeting URL",
+      accessor: "guestcalltoken",
     },
-    {
-      Header: "Created On",
-      Footer: "Created On",
-      accessor: "createdon",
-    },
+    
     {
       Header: "Start Time",
       Footer: "Start Time",
       accessor: "meetingstarttime",
+    },
+    {
+      Header: "End Time",
+      Footer: "End Time",
+      accessor: "meetingendtime",
     },
   ];
 
@@ -95,12 +97,11 @@ const MeetingDetails = (props) => {
 
   const onRefreshMeetingDetails = () => {
     dispatch(meetingDetailsAction.getMeetingDetails());
-    window.location.reload();
   }
 
   return (
     <>
-      <button onClick={onRefreshMeetingDetails}>Refresh</button>
+      <button onClick={onRefreshMeetingDetails}><FiRefreshCcw /></button>
       {meetingDetailsList.length !== 0 && (
         <div className="table-responsive">
           <table className="table table-striped" {...getTableProps()}>
@@ -123,6 +124,7 @@ const MeetingDetails = (props) => {
                 prepareRow(cell);
                 return (
                   <tr
+                    key={index}
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                       dispatch(
@@ -135,7 +137,9 @@ const MeetingDetails = (props) => {
                     <td>{index + 1}</td>
                     {cell.cells.map((data) => (
                       <>
-                        <td>{data.value}</td>
+                        {console.log("Data:", data.column)}
+                        {console.log("Header:", data.column.Header)}
+                        <td>{ data.column.Header === "Meeting URL" ? "https://viedocqavideoconnect.azurewebsites.net/?token="+data.value : data.value}</td>
                       </>
                     ))}
                   </tr>
