@@ -1,10 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import Container from './app/layout/container/container';
-import Loader from './app/layout/loader/loader';
+import Login from './app/pages/Login/login';
+import MeetingRoom from './app/pages/MeetingRoom/meetingRoom';
+import MeetingDetails from './app/pages/MeetingDetails/meetingDetails';
+import MeetingForm from './app/pages/MeetingForm/meetingForm';
+import {Routes, Route} from 'react-router-dom';
 function App() {
   return (
-    <Container></Container>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/meetingCreation" element={<MeetingForm />} />
+      <Route path="/meetingDetails" element={<MeetingDetails />} />
+      <Route path="/meetingRoom" element={<MeetingRoom />} />
+    </Routes>
   );
 }
 

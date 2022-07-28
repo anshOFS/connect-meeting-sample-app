@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
-import { useSelector, useDispatch } from "react-redux";
-import * as meetingDetailsAction from '../../store/actions/meetingActions'
+
 import {v4 as generateUUID} from 'uuid';
-import {IoMdCreate} from 'react-icons/io'
-import DtPicker, {convertToFa} from 'react-calendar-datetime-picker'
+import {IoMdCreate} from 'react-icons/io';
+import { useNavigate } from 'react-router';
 import 'react-calendar-datetime-picker/dist/index.css'
 import DateTimePicker from 'react-datetime-picker';
+
+import { createMeetingDetails } from "../../service/meetingDetails.service";
 
 const MeetingForm = (props) => {
 
   const [meetingStartTime, setMeetingStartTime] = useState(null)
   const [meetingEndTime, setMeetingEndTime] = useState(null)
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (values) => {
     const createMeetingDetailsPayload = {
@@ -33,8 +34,11 @@ const MeetingForm = (props) => {
       },
       createdBy: values.hostID
     }
-    console.log("values:", createMeetingDetailsPayload)
-    dispatch(meetingDetailsAction.createMeetingDetails(createMeetingDetailsPayload));
+    createMeetingDetails(createMeetingDetailsPayload).then(
+      (response) => {
+        navigate('/meetingRoom', { state: { token: response.data.result.hostcalltoken, callerType: "Host" } })
+      }
+    ).catch(err => console.log(err))
   }
   return (
     <div className="mask d-flex align-items-center h-100 gradient-custom-3">

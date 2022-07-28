@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from 'react-router';
+
 
 const Login = (props) => {
-  const {onRoleButtonClick} = props;
+
+  const naviagte = useNavigate();
+
+  const onRoleButtonClick = (role) => {
+    role === 'Host' ? naviagte('/meetingCreation') : naviagte('/meetingDetails', { state: {callerType: "Guest" } });
+  }
 
     return (
         <div className="container py-5 h-100">
