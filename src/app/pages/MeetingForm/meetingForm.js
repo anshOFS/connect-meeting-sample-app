@@ -43,6 +43,9 @@ const MeetingForm = (props) => {
   return (
     <div className="mask d-flex align-items-center h-100 gradient-custom-3">
       <div className="container h-100">
+        <div style={{position: "absolute", right: "5px", top: "5px"}}>
+          <button style={{ borderRadius: '8px', outline: "none", border: "1px solid grey" }} onClick={() => navigate('/meetingDetails', { state: {callerType: "Host" } })}>Meeting Details</button>
+        </div>
         <div className="row d-flex justify-content-center align-items-center h-100 mt-2">
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">
             <div className="card" style={{ borderRadius: "15px" }}>

@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router';
 
 const Login = (props) => {
 
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
   const onRoleButtonClick = (role) => {
-    role === 'Host' ? naviagte('/meetingCreation') : naviagte('/meetingDetails', { state: {callerType: "Guest" } });
+    role === 'Host' ? navigate('/meetingCreation') : navigate('/meetingDetails', { state: {callerType: "Guest" } });
   }
 
     return (
