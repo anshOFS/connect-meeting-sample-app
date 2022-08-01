@@ -8,7 +8,7 @@ import DateTimePicker from 'react-datetime-picker';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
-
+import './meetingForm.css';
 import { createMeetingDetails } from "../../service/meetingDetails.service";
 
 const MeetingForm = (props) => {
@@ -57,7 +57,7 @@ const MeetingForm = (props) => {
                   onSubmit={(values) => {
                     onSubmit(values)
                   }}
-                  render={({ handleSubmit, form, submitting, pristine }) => (
+                  render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form style={{marginLeft: '36px'}} onSubmit={handleSubmit}>
                       <div className="d-flex form-outline mb-4">
                         <label
