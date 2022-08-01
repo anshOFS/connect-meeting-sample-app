@@ -4,8 +4,10 @@ import { Form, Field } from "react-final-form";
 import {v4 as generateUUID} from 'uuid';
 import {IoMdCreate} from 'react-icons/io';
 import { useNavigate } from 'react-router';
-import 'react-calendar-datetime-picker/dist/index.css'
 import DateTimePicker from 'react-datetime-picker';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+
 
 import { createMeetingDetails } from "../../service/meetingDetails.service";
 
@@ -55,7 +57,7 @@ const MeetingForm = (props) => {
                   onSubmit={(values) => {
                     onSubmit(values)
                   }}
-                  render={({ handleSubmit, form }) => (
+                  render={({ handleSubmit, form, submitting, pristine }) => (
                     <form style={{marginLeft: '36px'}} onSubmit={handleSubmit}>
                       <div className="d-flex form-outline mb-4">
                         <label
@@ -283,6 +285,7 @@ const MeetingForm = (props) => {
                         <button
                           type="submit"
                           className="btn btn-block btn-lg btn-primary text-body text-white"
+                          disabled={submitting || pristine}
                         >
                           Submit
                         </button>

@@ -119,11 +119,28 @@ const MeetingDetails = (props) => {
 
   const onRefreshMeetingDetails = () => {
     getMeetingDetailsList();
+    document.location.reload();
+  }
+
+  const utcToIST = (utcDate) => {
+    const date = new Date(utcDate);
+    return date.toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+      hour12: true,
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hourCycle: "h23",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
   }
 
   return (
     <>
-      <button onClick={onRefreshMeetingDetails}><FiRefreshCcw /></button>
+      <button style={{ margin: "4px 0px 0px 4px", borderRadius: '8px', outline: "none", border: "1px solid grey"}} onClick={onRefreshMeetingDetails}><FiRefreshCcw /></button>
+      <button style={{ margin: "4px 0px 0px 4px", borderRadius: '8px', outline: "none", border: "1px solid grey"}} onClick={() => navigate('/', {replace: true})}>Homepage</button>
       {meetingDetailsList.length !== 0 && (
         <div className="table-responsive">
           <table className="table table-striped" {...getTableProps()}>
@@ -155,7 +172,11 @@ const MeetingDetails = (props) => {
                     <td>{index + 1}</td>
                     {cell.cells.map((data) => (
                       <>
-                        <td>{ data.column.Header === "Meeting URL" ? `${HOSTED_URL}${CALL_TOKEN}`+data.value : data.value}</td>
+                        {console.log(data.column)}
+                        {console.log(data.value)}
+                        {/* <td>{ data.column.Header === "Meeting URL" ? `${HOSTED_URL}${CALL_TOKEN}`+data.value : data.value}</td> */}
+                        <td>{ data.column.Header === "Meeting URL" ? `${HOSTED_URL}${CALL_TOKEN}`+data.value : (data.column.Header === "Start Time" || data.column.Header === "End Time") ? utcToIST(data.value) : data.value}</td>
+
                       </>
                     ))}
                   </tr>
