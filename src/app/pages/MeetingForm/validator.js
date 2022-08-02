@@ -33,11 +33,11 @@ export const validator = (values) => {
     if (!values.createdBy) {
         errors.createdBy = 'Created By is Required';
     }
-    if (!values.meetingStartTime) {
-        errors.meetingStartTime = 'Meeting start time required';
-    }
-    if (!values.meetingEndTime) {
-        errors.meetingEndTime = 'Meeting end time required';
-    }
+    // if (!values.meetingStartTime) {
+    //     errors.meetingStartTime = 'Meeting start time required';
+    // }
+    // if (!values.meetingEndTime) {
+    //     errors.meetingEndTime = 'Meeting end time required';
+    // }
     return errors;
 };

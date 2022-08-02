@@ -147,7 +147,7 @@ const MeetingDetails = (props) => {
             <thead>
               {headerGroups.map((headerGroup, index) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                  {index === 0 && <th>Sr.no</th>}
+                  {index === 0 && <th>S.No</th>}
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps(column.getSortByToggleProps())}

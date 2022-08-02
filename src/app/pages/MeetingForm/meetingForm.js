@@ -4,12 +4,17 @@ import { Form, Field } from "react-final-form";
 import { v4 as generateUUID } from "uuid";
 import { IoMdCreate } from "react-icons/io";
 import { useNavigate } from "react-router";
-import "react-calendar-datetime-picker/dist/index.css";
-import DateTimePicker from "react-datetime-picker";
+
+import TextField from '@mui/material/TextField';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import { validator } from "./validator";
 import { createMeetingDetails } from "../../service/meetingDetails.service";
 import './meetingForm.css';
+import { SNACKBAR_DURATION } from "../../../config/constants";
+import Toaster from "../../components/Toaster/Toaster";
 
 const MeetingForm = (props) => {
 
@@ -20,6 +25,18 @@ const MeetingForm = (props) => {
 
   const classStyleError = "form-control form-control-sg error-border";
   const classStyleSuccess = "form-control form-control-sg";
+
+  const [message, setMessage] = useState('');
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+
+  const snackbarHandler = (errorMessage) => {
+      setMessage(errorMessage);
+      setIsAlertVisible(true);
+
+      setTimeout(() => {
+          setIsAlertVisible(false);
+      }, SNACKBAR_DURATION);
+  }
 
   const onSubmit = (values) => {
     const createMeetingDetailsPayload = {
@@ -41,6 +58,7 @@ const MeetingForm = (props) => {
     }
     createMeetingDetails(createMeetingDetailsPayload)
       .then((response) => {
+        console.log(response);
         navigate("/meetingRoom", {
           state: {
             token: response.data.result.hostcalltoken,
@@ -48,9 +66,11 @@ const MeetingForm = (props) => {
           },
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => snackbarHandler(err.message));
   }
   return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      {isAlertVisible && <Toaster message={message}/>}
     <div className="mask d-flex align-items-center h-100 gradient-custom-3">
       <div className="container h-100">
         <div style={{ position: "absolute", right: "5px", top: "5px" }}>
@@ -77,7 +97,7 @@ const MeetingForm = (props) => {
                   onSubmit={(values) => {
                     onSubmit(values);
                   }}
-                  render={({ handleSubmit, form }) => (
+                  render={({ handleSubmit, form, submitting, pristine }) => (
                     <form
                       style={{ marginLeft: "36px" }}
                       onSubmit={handleSubmit}
@@ -107,7 +127,7 @@ const MeetingForm = (props) => {
                               </div>
                               <div>
                                 <button
-                                  className="btn btn-block btn-sm btn-secondary text-body mx-1"
+                                  className="btn btn-block btn-md btn-secondary text-body mx-1"
                                   type="button"
                                   onClick={() =>
                                     form.change("meetingID", generateUUID())
@@ -145,7 +165,7 @@ const MeetingForm = (props) => {
                               </div>
                               <div>
                                 <button
-                                  className="btn btn-block btn-sm btn-secondary text-body mx-1"
+                                  className="btn btn-block btn-md btn-secondary text-body mx-1"
                                   type="button"
                                   onClick={() => {
                                     const idValue = generateUUID();
@@ -243,7 +263,7 @@ const MeetingForm = (props) => {
                               </div>
                               <div>
                                 <button
-                                  className="btn btn-block btn-sm btn-secondary text-body mx-1"
+                                  className="btn btn-block btn-md btn-secondary text-body mx-1"
                                   type="button"
                                   onClick={() =>
                                     form.change("guestID", generateUUID())
@@ -337,7 +357,7 @@ const MeetingForm = (props) => {
                               </div>
                               <div>
                                 <button
-                                  className="btn btn-block btn-sm btn-secondary text-body mx-1"
+                                  className="btn btn-block btn-md btn-secondary text-body mx-1"
                                   type="button"
                                   onClick={() =>
                                     form.change("studyID", generateUUID())
@@ -375,7 +395,7 @@ const MeetingForm = (props) => {
                               </div>
                               <div>
                                 <button
-                                  className="btn btn-block btn-sm btn-secondary text-body mx-1"
+                                  className="btn btn-block btn-md btn-secondary text-body mx-1"
                                   type="button"
                                   onClick={() =>
                                     form.change("tenantID", generateUUID())
@@ -407,9 +427,9 @@ const MeetingForm = (props) => {
                                   type="text"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
-                                {meta.error && meta.touched && (
+                                {/* {meta.error && meta.touched && (
                                   <span className="error-msg">{meta.error}</span>
-                                )}
+                                )} */}
                               </div>
                               
                             </div>
@@ -426,17 +446,21 @@ const MeetingForm = (props) => {
                               >
                                 Meeting Start Time
                               </label>
-                              <DateTimePicker
-                                onChange={input.onChange}
-                                value={input.value}
-                                className="datetime-picker"
-                                disableClock
+
+                                <DateTimePicker
+                                  minDateTime={new Date()}
+                                  renderInput={(props) => <TextField {...props} />}
+                                  label="Meeting Start time"
+                                  value={meetingStartTime}
+                                  onChange={(value) => {
+                                    setMeetingStartTime(value);
+                                  }}
                               />
                             </div>
-                            {(meta.error || meta.submitError) &&
+                            {/* {(meta.error || meta.submitError) &&
                               meta.touched && (
                                 <span className="error-msg">{meta.error || meta.submitError}</span>
-                              )}
+                              )} */}
                           </div>
                         )}
                       </Field>
@@ -449,8 +473,13 @@ const MeetingForm = (props) => {
                         </label>
 
                         <DateTimePicker
-                          onChange={setMeetingEndTime}
+                          minDateTime={new Date()}
+                          renderInput={(props) => <TextField {...props} />}
+                          label="Meeting End time"
                           value={meetingEndTime}
+                          onChange={(value) => {
+                            setMeetingEndTime(value);
+                          }}
                           className="datetime-picker"
                           disableClock
                         />
@@ -487,6 +516,7 @@ const MeetingForm = (props) => {
                         <button
                           type="submit"
                           className="btn btn-block btn-lg btn-primary text-body text-white"
+                          
                         >
                           Submit
                         </button>
@@ -500,6 +530,7 @@ const MeetingForm = (props) => {
         </div>
       </div>
     </div>
+    </LocalizationProvider>
   );
 };
 
