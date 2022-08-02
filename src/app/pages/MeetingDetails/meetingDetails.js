@@ -175,7 +175,9 @@ const MeetingDetails = (props) => {
                         {console.log(data.column)}
                         {console.log(data.value)}
                         {/* <td>{ data.column.Header === "Meeting URL" ? `${HOSTED_URL}${CALL_TOKEN}`+data.value : data.value}</td> */}
-                        <td>{ data.column.Header === "Meeting URL" ? `${HOSTED_URL}${CALL_TOKEN}`+data.value : (data.column.Header === "Start Time" || data.column.Header === "End Time") ? utcToIST(data.value) : data.value}</td>
+                        <td>{ data.column.Header === "Meeting URL" ? `${HOSTED_URL}${CALL_TOKEN}`+data.value 
+                              : (data.column.Header === "Start Time" || data.column.Header === "End Time") ? utcToIST(data.value) 
+                                : data.value}</td>
 
                       </>
                     ))}
