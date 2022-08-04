@@ -1,0 +1,61 @@
+.button-group .refresh-btn, .button-group .home-page-btn{
+    width: 120px;
+    border: 0px;
+    margin-right: 10px;
+    background-color: #1E156D;
+    cursor: pointer;
+    padding: 5px 25px;
+    color: #fff;
+}
+
+.button-group .refresh-btn:hover, .button-group .home-page-btn:hover{
+    background-color: #191352;
+}
+.button-group .refresh-btn:active, .button-group .home-page-btn:active{
+    background-color: #191352;
+}
+
+
+.button-group{
+    margin: 15px 10px;
+}
+
+.table-responsive{
+    margin: 0px 15px;
+}
+
+.table-responsive .table th{
+    font-size: 0.8rem;
+    color: #1E156D;
+}
+
+.table>:not(:first-child){
+    border-top: 2px solid #1E156D !important;
+}
+.table-responsive .table td{
+    font-size: 0.9rem;
+    height: 46px;
+    cursor: pointer;
+}
+
+.table-responsive .table tbody tr:hover{
+    background-color: #c2bcf0;
+}
+.page-pagination .pagination{
+    float: right;
+    margin-right: 15px;
+}
+.page-pagination .pagination .page-item .page-link{
+    background-color: #e8e7f1;
+    color: #1E156D;
+}
+
+.page-pagination .pagination .page-item .page-link:hover{
+    background-color: #d8d5f3;
+    color: #1E156D;
+}
+.page-pagination .pagination .page-item.active .page-link{
+    background-color: #beb8f3;
+    color: #1E156D;
+    border: 1px solid #1E156D;
+}

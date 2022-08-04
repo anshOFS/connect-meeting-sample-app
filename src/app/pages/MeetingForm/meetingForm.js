@@ -7,8 +7,6 @@ import { useNavigate } from "react-router";
 
 import TextField from '@mui/material/TextField';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import { validator } from "./validator";
 import { createMeetingDetails } from "../../service/meetingDetails.service";
@@ -68,18 +66,18 @@ const MeetingForm = (props) => {
       })
       .catch((err) => snackbarHandler(err.message));
   }
+  // console.log("meetingStartTime", meetingStartTime?.getTime())
+  // console.log("meetingEndTime", meetingEndTime?.getTime())
+  // console.log("Difference:", meetingEndTime?.getTime() - meetingStartTime?.getTime())
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <>
       {isAlertVisible && <Toaster message={message}/>}
     <div className="mask d-flex align-items-center h-100 gradient-custom-3">
       <div className="container h-100">
         <div style={{ position: "absolute", right: "5px", top: "5px" }}>
           <button
-            style={{
-              borderRadius: "8px",
-              outline: "none",
-              border: "1px solid grey",
-            }}
+            className="meetingDetails"
             onClick={() =>
               navigate("/meetingDetails", { state: { callerType: "Host" } })
             }
@@ -91,7 +89,7 @@ const MeetingForm = (props) => {
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">
             <div className="card" style={{ borderRadius: "15px" }}>
               <div className="card-body p-3">
-                <h2 className="text-center mb-4">Meeting Creation Form</h2>
+                <h2 className="text-center mb-4 title">Meeting Creation Form</h2>
                 <Form
                   validate={validator}
                   onSubmit={(values) => {
@@ -99,7 +97,7 @@ const MeetingForm = (props) => {
                   }}
                   render={({ handleSubmit, form, submitting, pristine }) => (
                     <form
-                      style={{ marginLeft: "36px" }}
+                      className="meetingForm"
                       onSubmit={handleSubmit}
                     >
                       <Field
@@ -110,7 +108,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Meeting ID
@@ -119,6 +117,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Meeting ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -148,7 +147,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Host ID
@@ -157,6 +156,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Host ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -190,7 +190,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Host Name
@@ -199,6 +199,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Host Name"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -218,7 +219,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Host Code
@@ -227,6 +228,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Host Code"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -246,7 +248,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Guest ID
@@ -255,6 +257,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Guest ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -284,7 +287,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Guest Name
@@ -293,6 +296,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Guest Name"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -312,7 +316,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Guest Code
@@ -321,6 +325,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Guest Code"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -340,7 +345,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Study ID
@@ -349,6 +354,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Study ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -378,7 +384,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Tenant ID
@@ -387,6 +393,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Tenant ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -416,7 +423,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Subject
@@ -425,11 +432,12 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Subject"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
-                                {/* {meta.error && meta.touched && (
+                                {meta.error && meta.touched && (
                                   <span className="error-msg">{meta.error}</span>
-                                )} */}
+                                )}
                               </div>
                               
                             </div>
@@ -441,7 +449,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Meeting Start Time
@@ -449,9 +457,11 @@ const MeetingForm = (props) => {
 
                                 <DateTimePicker
                                   minDateTime={new Date()}
-                                  renderInput={(props) => <TextField {...props} />}
+                                  renderInput={
+                                    (props) => 
+                                      <TextField {...props} />}
                                   label="Meeting Start time"
-                                  value={meetingStartTime}
+                                  value={meetingStartTime ? meetingStartTime : new Date()}
                                   onChange={(value) => {
                                     setMeetingStartTime(value);
                                   }}
@@ -464,26 +474,36 @@ const MeetingForm = (props) => {
                           </div>
                         )}
                       </Field>
-                      <div className="d-flex form-outline mb-2">
-                        <label
-                          className="form-label mt-1"
-                          style={{ width: "6rem" }}
-                        >
-                          Meeting End Time
-                        </label>
+                      <Field name="meetingEndTime">
+                        {({ input, meta }) => (
+                          <div>
+                            <div className="d-flex form-outline mb-2">
+                              <label
+                                className="label"
+                                style={{ width: "6rem" }}
+                              >
+                                Meeting End Time
+                              </label>
 
-                        <DateTimePicker
-                          minDateTime={new Date()}
-                          renderInput={(props) => <TextField {...props} />}
-                          label="Meeting End time"
-                          value={meetingEndTime}
-                          onChange={(value) => {
-                            setMeetingEndTime(value);
-                          }}
-                          className="datetime-picker"
-                          disableClock
-                        />
-                      </div>
+                                <DateTimePicker
+                                  minDateTime={meetingStartTime ? meetingStartTime.getTime() + (1000 * 60 * 60 * 0.25) : (new Date().getTime() + (1000 * 60 * 60 * 0.25))}
+                                  maxDateTime={meetingStartTime ? meetingStartTime.getTime() + (1000 * 60 * 60 * 1) : (new Date().getTime() + (1000 * 60 * 60 * 1))}
+                                  renderInput={(props) => <TextField {...props} />}
+                                  label="Meeting End time"
+                                  value={meetingEndTime ? meetingEndTime :( meetingStartTime ? meetingStartTime.getTime() + (1000 * 60 * 60 * 1) : new Date().getTime() + (1000 * 60 * 60 * 1))}
+                                  onChange={(value) => {
+                                    
+                                    setMeetingEndTime(value);
+                                  }}
+                                />
+                            </div>
+                            {/* {(meta.error || meta.submitError) &&
+                              meta.touched && (
+                                <span className="error-msg">{meta.error || meta.submitError}</span>
+                              )} */}
+                          </div>
+                        )}
+                      </Field>
                       <Field
                         name="createdBy"
                         style={{ width: "20rem", marginLeft: "10px" }}
@@ -492,7 +512,7 @@ const MeetingForm = (props) => {
                           <div>
                             <div className="d-flex form-outline mb-2">
                               <label
-                                className="form-label mt-1"
+                                className="label"
                                 style={{ width: "6rem" }}
                               >
                                 Created By
@@ -501,6 +521,7 @@ const MeetingForm = (props) => {
                                 <input
                                   {...input}
                                   type="text"
+                                  placeholder="Created By"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -512,11 +533,11 @@ const MeetingForm = (props) => {
                           </div>
                         )}
                       </Field>
-                      <div className="d-flex justify-content-center">
+                      <div className="d-flex justify-content-center btn-sub">
                         <button
                           type="submit"
                           className="btn btn-block btn-lg btn-primary text-body text-white"
-                          
+                          disabled={submitting || pristine}
                         >
                           Submit
                         </button>
@@ -530,7 +551,7 @@ const MeetingForm = (props) => {
         </div>
       </div>
     </div>
-    </LocalizationProvider>
+    </>
   );
 };
 

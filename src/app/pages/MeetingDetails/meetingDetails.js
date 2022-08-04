@@ -9,6 +9,7 @@ import {useLocation} from "react-router-dom";
 import { getMeetingDetails } from "../../service/meetingDetails.service";
 import { CALL_TOKEN } from "../../../config/constants";
 import { HOSTED_URL } from "../../service/base.service";
+import './meetingDetails.css';
 
 const MeetingDetails = (props) => {
 
@@ -139,8 +140,10 @@ const MeetingDetails = (props) => {
 
   return (
     <>
-      <button style={{ margin: "4px 0px 0px 4px", borderRadius: '8px', outline: "none", border: "1px solid grey"}} onClick={onRefreshMeetingDetails}><FiRefreshCcw /></button>
-      <button style={{ margin: "4px 0px 0px 4px", borderRadius: '8px', outline: "none", border: "1px solid grey"}} onClick={() => navigate('/', {replace: true})}>Homepage</button>
+      <div className="button-group">
+        <button className="refresh-btn" onClick={onRefreshMeetingDetails}><FiRefreshCcw /></button>
+        <button className="home-page-btn" onClick={() => navigate('/', {replace: true})}>Homepage</button>
+      </div>
       {meetingDetailsList.length !== 0 && (
         <div className="table-responsive">
           <table className="table table-striped" {...getTableProps()}>
@@ -164,7 +167,7 @@ const MeetingDetails = (props) => {
                 return (
                   <tr
                     key={index}
-                    style={{ cursor: "pointer" }}
+                      
                     onClick={() => {
                       navigate('/meetingRoom', { state: { token: location.state.callerType === 'Host' ? cell.values.hostcalltoken : cell.values.guestcalltoken, callerType: location.state.callerType } })
                     }}
@@ -186,11 +189,11 @@ const MeetingDetails = (props) => {
               })}
             </tbody>
           </table>
-          <div style={{ float: "right", marginRight: "15px" }}>
-            <nav aria-label="Page navigation example">
+          <div className="page-pagination">
+            <nav aria-label="Page navigation">
               <ul className="pagination pg-blue">
                 <li
-                  className="page-item "
+                  className="page-item"
                   role={"button"}
                   tabIndex="-1"
                   onClick={() => previousPage()}

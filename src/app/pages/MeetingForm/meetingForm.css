@@ -6,8 +6,81 @@
     color: red;
     display: flex;
     width: 20rem;
+    font-size: 0.8rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .react-datetime-picker .react-datetime-picker__wrapper{
-    border: 1px solid red !important;
+    border: 1px solid #FF2E00 !important;
+}
+
+.btn.btn-secondary{
+    background-color: #fff;
+    color: #1E156D !important;
+    border: 1px solid #1E156D !important;
+}
+
+.btn.btn-secondary:hover, .btn.btn-secondary:active, .btn.btn-secondary:focus{
+    background-color: #191352;
+    border-color: #191352;
+    color: #fff !important;
+    box-shadow: 0 0 0 0.25rem rgb(30 21 109 / 50%);
+}
+.meetingDetails{
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid #1E156D;
+    background-color: #1E156D; 
+    color: #fff;
+    padding: 4px 35px;
+}
+
+.btn-check:focus+.btn-secondary, .btn-secondary:focus{
+    box-shadow: 0 0 0 0.25rem rgb(30 21 109 / 50%);
+}
+
+.MuiFormControl-root .MuiInputBase-root{
+    width: 405px;
+}
+
+.btn-sub{
+    padding: 18px 0px;
+}
+
+.btn-sub > button.btn-primary{
+    width: 100%;
+    color: #fff !important;
+    background-color: #1E156D;
+    border: 0px;
+}
+
+.btn-sub > button.btn-primary:hover{
+    width: 100%;
+    color: #fff !important;
+    background-color: #191352;
+}
+
+.meetingForm .meetinglabel label{
+    padding-right: 10px;
+}
+
+.label {
+    display: inline-block;
+    color: #1E156D;
+    font-size: 1rem;
+    margin: 5px;
+    font-weight: 700;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1E156D;
+}
+
+@media screen and (min-width: 1367px) and (max-width: 5500px) {
+    .MuiFormControl-root .MuiInputBase-root{
+        width: 460px;
+    }
 }

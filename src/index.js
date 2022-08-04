@@ -5,15 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <BrowserRouter>
           <App />
       </BrowserRouter>
-    
- 
+    </LocalizationProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
