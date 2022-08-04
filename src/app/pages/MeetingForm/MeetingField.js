@@ -9,7 +9,6 @@ export const MeetingField = ({ name, label, inputProps, right }) => {
     >
       {({ input, meta }) => (
         <div>
-            {console.log(input)}
           <div className="d-flex form-outline mb-4">
             <label className="form-label mt-1" style={{ width: "6rem" }}>
               {label}

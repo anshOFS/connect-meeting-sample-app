@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Field } from "react-final-form";
 
 import { v4 as generateUUID } from "uuid";
@@ -16,8 +16,8 @@ import Toaster from "../../components/Toaster/Toaster";
 
 const MeetingForm = (props) => {
 
-  const [meetingStartTime, setMeetingStartTime] = useState(null)
-  const [meetingEndTime, setMeetingEndTime] = useState(null)
+  const [meetingStartTime, setMeetingStartTime] = useState(initialTime);
+  const [meetingEndTime, setMeetingEndTime] = useState(getTiming(meetingStartTime))
 
   const navigate = useNavigate();
 
@@ -26,6 +26,19 @@ const MeetingForm = (props) => {
 
   const [message, setMessage] = useState('');
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+
+  function initialTime() {
+    return new Date(new Date().setSeconds(new Date().getSeconds() + 60));
+  }
+
+  function getTiming(time) {
+    return new Date(new Date(time).setHours(time.getHours() + 1));
+  }
+
+  useEffect(() => {
+    getTiming(meetingStartTime);
+  }, [meetingStartTime]);
+
 
   const snackbarHandler = (errorMessage) => {
       setMessage(errorMessage);
@@ -56,7 +69,6 @@ const MeetingForm = (props) => {
     }
     createMeetingDetails(createMeetingDetailsPayload)
       .then((response) => {
-        console.log(response);
         navigate("/meetingRoom", {
           state: {
             token: response.data.result.hostcalltoken,
@@ -66,10 +78,7 @@ const MeetingForm = (props) => {
       })
       .catch((err) => snackbarHandler(err.message));
   }
-  // console.log("meetingStartTime", meetingStartTime?.getTime())
-  // console.log("meetingEndTime", meetingEndTime?.getTime())
-  // console.log("Difference:", meetingEndTime?.getTime() - meetingStartTime?.getTime())
-
+  
   return (
     <>
       {isAlertVisible && <Toaster message={message}/>}
@@ -460,10 +469,11 @@ const MeetingForm = (props) => {
                                   renderInput={
                                     (props) => 
                                       <TextField {...props} />}
-                                  label="Meeting Start time"
-                                  value={meetingStartTime ? meetingStartTime : new Date()}
+                                  
+                                  value={meetingStartTime}
                                   onChange={(value) => {
                                     setMeetingStartTime(value);
+                                    setMeetingEndTime(getTiming(value))
                                   }}
                               />
                             </div>
@@ -486,13 +496,12 @@ const MeetingForm = (props) => {
                               </label>
 
                                 <DateTimePicker
-                                  minDateTime={meetingStartTime ? meetingStartTime.getTime() + (1000 * 60 * 60 * 0.25) : (new Date().getTime() + (1000 * 60 * 60 * 0.25))}
-                                  maxDateTime={meetingStartTime ? meetingStartTime.getTime() + (1000 * 60 * 60 * 1) : (new Date().getTime() + (1000 * 60 * 60 * 1))}
+                                  minDateTime={meetingStartTime.getTime() + (1000 * 60 * 60 * 0.25)}
+                                  maxDateTime={meetingStartTime.getTime() + (1000 * 60 * 60 * 1)}
                                   renderInput={(props) => <TextField {...props} />}
-                                  label="Meeting End time"
-                                  value={meetingEndTime ? meetingEndTime :( meetingStartTime ? meetingStartTime.getTime() + (1000 * 60 * 60 * 1) : new Date().getTime() + (1000 * 60 * 60 * 1))}
+                                  
+                                  value={meetingEndTime }
                                   onChange={(value) => {
-                                    
                                     setMeetingEndTime(value);
                                   }}
                                 />

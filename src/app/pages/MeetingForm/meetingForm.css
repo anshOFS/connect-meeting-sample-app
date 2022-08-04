@@ -79,8 +79,23 @@
     color: #1E156D;
 }
 
+.MuiFormControl-root .MuiInputBase-root{
+    width: 415px;
+    border: 1px solid #ced4da;
+}
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
+    border: 0px;
+}
+.MuiFormControl-root .MuiInputBase-root:hover{
+    border: 1px solid #ced4da;
+}
+.MuiFormControl-root .MuiInputBase-root fieldset.MuiOutlinedInput-notchedOutline{
+    display: none;
+}
+
 @media screen and (min-width: 1367px) and (max-width: 5500px) {
     .MuiFormControl-root .MuiInputBase-root{
         width: 460px;
     }
 }
+
