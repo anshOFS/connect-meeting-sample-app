@@ -1,19 +1,29 @@
-.button-group .refresh-btn, .button-group .home-page-btn{
+.button-group .home-page-btn{
     width: 120px;
     border: 0px;
-    margin-right: 10px;
     background-color: #1E156D;
     cursor: pointer;
-    border-radius: 5px;
     padding: 5px 25px;
     color: #fff;
 }
 
+.button-group .refresh-btn{
+    width: 120px;
+    margin-right: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 5px 25px;
+    color: #1E156D;
+    border: 1px solid #1E156D;
+}
+
 .button-group .refresh-btn:hover, .button-group .home-page-btn:hover{
     background-color: #191352;
+    color: #fff;
 }
 .button-group .refresh-btn:active, .button-group .home-page-btn:active{
     background-color: #191352;
+    color: #fff;
 }
 
 
