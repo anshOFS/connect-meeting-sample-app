@@ -11,11 +11,16 @@ const MeetingRoom = (props) => {
     const role = location.state.callerType;
     const [showIFrame, setShowIFrame] = useState(role === "Guest");
 
+    const style = {
+        minWidth: "100%",
+        minHeight: "95%",
+    }
+
     const token = location.state.token;
     return (
         <div className="room-container">
-            {role === 'Host' && <button onClick={() => setShowIFrame(true)}>Meeting URL: {HOSTED_URL}{CALL_TOKEN}{token}</button>}
-            {showIFrame && <iframe title="ViedocConnect" src={`${HOSTED_URL}${CALL_TOKEN}${token}`} width="1360" height="691" allow="camera;microphone;display-capture;fullscreen">           
+            {role === 'Host' && <button style={{position: "absolute"}} onClick={() => setShowIFrame(true)}>Meeting URL: {HOSTED_URL}{CALL_TOKEN}{token}</button>}
+            {showIFrame && <iframe title="ViedocConnect" src={`${HOSTED_URL}${CALL_TOKEN}${token}`} style={style} allow="camera;microphone;display-capture;fullscreen">           
             </iframe>}
         </div>
     );
