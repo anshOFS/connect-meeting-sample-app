@@ -7,3 +7,8 @@
 .room-container > button {
     align-self: center;
 }
+
+.frame {
+    min-width: 100vw;
+    min-height: 100vh;
+}
