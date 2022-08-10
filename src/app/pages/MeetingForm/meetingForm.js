@@ -124,9 +124,10 @@ const MeetingForm = (props) => {
                               </label>
                               <div className="flex-grow-1">
                                 <input
+                                  readOnly
                                   {...input}
                                   type="text"
-                                  placeholder="Meeting ID"
+                                  placeholder="Click the button to generate Meeting ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -163,9 +164,10 @@ const MeetingForm = (props) => {
                               </label>
                               <div className="flex-grow-1">
                                 <input
+                                  readOnly
                                   {...input}
                                   type="text"
-                                  placeholder="Host ID"
+                                  placeholder="Click the button to generate Host ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -264,9 +266,10 @@ const MeetingForm = (props) => {
                               </label>
                               <div className="flex-grow-1">
                                 <input
+                                  readOnly
                                   {...input}
                                   type="text"
-                                  placeholder="Guest ID"
+                                  placeholder="Click the button to generate Guest ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -361,9 +364,10 @@ const MeetingForm = (props) => {
                               </label>
                               <div className="flex-grow-1">
                                 <input
+                                  readOnly
                                   {...input}
                                   type="text"
-                                  placeholder="Study ID"
+                                  placeholder="Click the button to generate Study ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -400,9 +404,10 @@ const MeetingForm = (props) => {
                               </label>
                               <div className="flex-grow-1">
                                 <input
+                                  readOnly
                                   {...input}
                                   type="text"
-                                  placeholder="Tenant ID"
+                                  placeholder="Click the button to generate Tenant ID"
                                   className={(meta.error && meta.touched) ? classStyleError : classStyleSuccess}
                                 />
                                 {meta.error && meta.touched && (
@@ -528,6 +533,7 @@ const MeetingForm = (props) => {
                               </label>
                               <div className="flex-grow-1">
                                 <input
+                                  readOnly
                                   {...input}
                                   type="text"
                                   placeholder="Created By"

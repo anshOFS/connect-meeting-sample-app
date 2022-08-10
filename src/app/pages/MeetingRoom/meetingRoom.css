@@ -1,7 +1,7 @@
 .room-container {
     display: flex;
     flex-direction: column;
-    background-color: #1a1919;
+    background-color: white;
 }
 
 .room-container > button {
@@ -11,4 +11,9 @@
 .frame {
     min-width: 100vw;
     min-height: 100vh;
+}
+
+.btn-style {
+    position: relative;
+    z-index: 0;
 }
