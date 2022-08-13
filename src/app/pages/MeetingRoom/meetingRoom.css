@@ -17,3 +17,21 @@
     position: relative;
     z-index: 0;
 }
+
+.home-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 120px;
+    border: 0px;
+    background-color: #1E156D;
+    cursor: pointer;
+    padding: 5px 25px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.home-btn:hover{
+    background-color: #191352;
+    color: #fff;
+}

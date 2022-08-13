@@ -30,8 +30,8 @@ export const validator = (values) => {
     if (!values.subject) {
         errors.subject = 'Subject is Required';
     }
-    if (!values.createdBy) {
-        errors.createdBy = 'Created By is Required';
-    }
+    // if (!values.createdBy) {
+    //     errors.createdBy = 'Created By is Required';
+    // }
     return errors;
 };

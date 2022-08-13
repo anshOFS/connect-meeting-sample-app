@@ -7,7 +7,8 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   const onRoleButtonClick = (role) => {
-    role === 'Host' ? navigate('/meetingCreation') : navigate('/meetingDetails', { state: {callerType: "Guest" } });
+    // role === 'Host' ? navigate('/meetingCreation') : navigate('/meetingDetails', { state: {callerType: "Guest" } });
+    navigate('/meetingDetails', { state: {callerType: role } });
   }
 
     return (
@@ -19,7 +20,7 @@ const Login = (props) => {
                 style={{ borderRadius: "1rem", alignItems: 'center' }}
               >
                 <div className="card-body p-5 text-center">
-                  <h3 className="mb-3">Login as</h3>
+                  <h3 className="mb-3">Join as</h3>
                 </div>
                 <button
                   className="btn btn-primary btn-lg btn-block mb-4"

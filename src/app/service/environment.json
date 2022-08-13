@@ -1,5 +1,5 @@
 {
-    "BASE_URL": "https://viedocqavideoconnectapi.azurewebsites.net/",
-    "ENV": "qa",
-    "HOSTED_URL": "https://viedocqavideoconnect.azurewebsites.net"
+    "BASE_URL": "https://azurevideomeetapi.azurewebsites.net/",
+    "ENV": "dev",
+    "HOSTED_URL": "https://azurevideomeet.azurewebsites.net"
 }

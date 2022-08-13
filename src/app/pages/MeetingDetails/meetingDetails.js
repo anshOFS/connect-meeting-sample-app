@@ -138,15 +138,39 @@ const MeetingDetails = (props) => {
     });
   }
 
+  const checkExpiredMeeting = (meetingEndTime) => {
+    const meetingEnd = new Date(meetingEndTime);
+    return (meetingEnd < new Date());
+  }
+
   return (
     <>
       <div className="button-group">
+
         <button className="refresh-btn" onClick={onRefreshMeetingDetails}><FiRefreshCcw /></button>
+
         <button className="home-page-btn" onClick={() => navigate('/', {replace: true})}>Homepage</button>
+        <div className="legend-container">
+          <label className="legend-label-available"></label>
+          <label style={{marginRight: "5px"}}>Available Meeting</label>
+
+          <label className="legend-label-expired"></label>
+          <label style={{marginRight: "5px"}}>Expired Meeting</label>
+        </div>
+        {isHost && <div style={{ position: "absolute", right: "5px", top: "5px" }}>
+          <button
+            className="meetingCreation"
+            onClick={() =>
+              navigate("/meetingCreation")
+            }
+          >
+            Schedule Meeting
+          </button>
+        </div>}
       </div>
       {meetingDetailsList.length !== 0 && (
         <div className="table-responsive">
-          <table className="table table-striped" {...getTableProps()}>
+          <table className="table " {...getTableProps()}>
             <thead>
               {headerGroups.map((headerGroup, index) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
@@ -167,7 +191,7 @@ const MeetingDetails = (props) => {
                 return (
                   <tr
                     key={index}
-                      
+                    className={checkExpiredMeeting(cell.original.meetingendtime) ? "disabled" : ""}
                     onClick={() => {
                       navigate('/meetingRoom', { state: { token: location.state.callerType === 'Host' ? cell.values.hostcalltoken : cell.values.guestcalltoken, callerType: location.state.callerType } })
                     }}

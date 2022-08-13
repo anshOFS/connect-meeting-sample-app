@@ -69,12 +69,13 @@ const MeetingForm = (props) => {
     }
     createMeetingDetails(createMeetingDetailsPayload)
       .then((response) => {
-        navigate("/meetingRoom", {
-          state: {
-            token: response.data.result.hostcalltoken,
-            callerType: "Host",
-          },
-        });
+        // navigate("/meetingRoom", {
+        //   state: {
+        //     token: response.data.result.hostcalltoken,
+        //     callerType: "Host",
+        //   },
+        // });
+        navigate('/meetingDetails', { state: {callerType: "Host" } })
       })
       .catch((err) => snackbarHandler(err.message));
   }
@@ -84,7 +85,7 @@ const MeetingForm = (props) => {
       {isAlertVisible && <Toaster message={message}/>}
     <div className="mask d-flex align-items-center h-100 gradient-custom-3">
       <div className="container h-100">
-        <div style={{ position: "absolute", right: "5px", top: "5px" }}>
+        {/* <div style={{ position: "absolute", right: "5px", top: "5px" }}>
           <button
             className="meetingDetails"
             onClick={() =>
@@ -93,7 +94,7 @@ const MeetingForm = (props) => {
           >
             Meeting Details
           </button>
-        </div>
+        </div> */}
         <div className="row d-flex justify-content-center align-items-center h-100 mt-2">
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">
             <div className="card" style={{ borderRadius: "15px" }}>
@@ -518,7 +519,7 @@ const MeetingForm = (props) => {
                           </div>
                         )}
                       </Field>
-                      <Field
+                      {/* <Field
                         name="createdBy"
                         style={{ width: "20rem", marginLeft: "10px" }}
                       >
@@ -547,7 +548,7 @@ const MeetingForm = (props) => {
                             </div>
                           </div>
                         )}
-                      </Field>
+                      </Field> */}
                       <div className="d-flex justify-content-center btn-sub">
                         <button
                           type="submit"

@@ -72,3 +72,40 @@
     color: #1E156D;
     border: 1px solid #1E156D;
 }
+
+.disabled {
+    pointer-events: none;
+    color: #666a6b9c;
+}
+
+.legend-container {
+    display: inline-block; 
+    margin-left: 10px;
+    padding: 8px;
+}
+
+.legend-label-available {
+    width: 15px;
+    height: 15px; 
+    background-color: #333;
+    margin-right: 5px;
+    padding: 8px;
+}
+
+.legend-label-expired {
+    width: 15px;
+    height: 15px; 
+    background-color: #666a6b9c;
+    margin-right: 5px;
+    padding: 8px;
+}
+
+.meetingCreation{
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid #1E156D;
+    background-color: #1E156D; 
+    color: #fff;
+    padding: 4px 35px;
+    margin: 15px 10px;
+}
